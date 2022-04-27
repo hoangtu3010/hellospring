@@ -16,20 +16,20 @@ public class StudentApi {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Student>> findAll(@RequestParam(defaultValue = "1") int page,
-                                                @RequestParam(defaultValue = "10") int limit){
+                                                 @RequestParam(defaultValue = "10") int limit) {
         return ResponseEntity.ok(studentService.findAll());
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Student> save(@RequestBody Student student){
+    public ResponseEntity<Student> save(@RequestBody Student student) {
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.save(student));
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/{rollNumber}")
-    public ResponseEntity<Student> update(@PathVariable String rollNumber, @RequestBody Student student){
+    public ResponseEntity<Student> update(@PathVariable String rollNumber, @RequestBody Student student) {
         Optional<Student> optionalStudent = studentService.findById(rollNumber);
 
-        if (!optionalStudent.isPresent()){
+        if (!optionalStudent.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
@@ -42,10 +42,10 @@ public class StudentApi {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{rollNumber}")
-    public ResponseEntity<Student> findById(@PathVariable String rollNumber){
+    public ResponseEntity<Student> findById(@PathVariable String rollNumber) {
         Optional<Student> optionalStudent = studentService.findById(rollNumber);
 
-        if (!optionalStudent.isPresent()){
+        if (!optionalStudent.isPresent()) {
             ResponseEntity.notFound();
         }
 
@@ -53,10 +53,10 @@ public class StudentApi {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/{rollNumber}")
-    public ResponseEntity<Boolean> delete(@PathVariable String rollNumber){
+    public ResponseEntity<Boolean> delete(@PathVariable String rollNumber) {
         Optional<Student> optionalStudent = studentService.findById(rollNumber);
 
-        if (!optionalStudent.isPresent()){
+        if (!optionalStudent.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
         }
 

@@ -17,20 +17,20 @@ public class ProductApi {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Product>> findAll(@RequestParam(defaultValue = "1") int page,
-                                                 @RequestParam(defaultValue = "10") int limit){
+                                                 @RequestParam(defaultValue = "10") int limit) {
         return ResponseEntity.ok(productService.findAll());
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Product> save(@RequestBody Product product){
+    public ResponseEntity<Product> save(@RequestBody Product product) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(product));
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-    public ResponseEntity<Product> update(@PathVariable int id, @RequestBody Product product){
+    public ResponseEntity<Product> update(@PathVariable int id, @RequestBody Product product) {
         Optional<Product> optionalProduct = productService.findById(id);
 
-        if (!optionalProduct.isPresent()){
+        if (!optionalProduct.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
@@ -44,10 +44,10 @@ public class ProductApi {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    public ResponseEntity<Product> findById(@PathVariable int id){
+    public ResponseEntity<Product> findById(@PathVariable int id) {
         Optional<Product> optionalProduct = productService.findById(id);
 
-        if (!optionalProduct.isPresent()){
+        if (!optionalProduct.isPresent()) {
             ResponseEntity.notFound();
         }
 
@@ -55,10 +55,10 @@ public class ProductApi {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable int id){
+    public ResponseEntity<Boolean> delete(@PathVariable int id) {
         Optional<Product> optionalProduct = productService.findById(id);
 
-        if (!optionalProduct.isPresent()){
+        if (!optionalProduct.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
         }
 

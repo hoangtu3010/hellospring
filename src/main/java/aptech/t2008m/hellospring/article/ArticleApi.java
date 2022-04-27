@@ -16,20 +16,20 @@ public class ArticleApi {
     ArticleService articleService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Article>> findAll(@RequestParam(defaultValue = "") String keyword){
+    public ResponseEntity<List<Article>> findAll(@RequestParam(defaultValue = "") String keyword) {
         return ResponseEntity.ok(articleService.findAll(keyword));
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Article> save(@RequestBody Article article){
+    public ResponseEntity<Article> save(@RequestBody Article article) {
         return ResponseEntity.status(HttpStatus.CREATED).body(articleService.save(article));
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-    public ResponseEntity<Article> update(@PathVariable int id, @RequestBody Article Article){
+    public ResponseEntity<Article> update(@PathVariable int id, @RequestBody Article Article) {
         Optional<Article> optionalArticle = articleService.findById(id);
 
-        if (!optionalArticle.isPresent()){
+        if (!optionalArticle.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
@@ -45,10 +45,10 @@ public class ArticleApi {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    public ResponseEntity<Article> findById(@PathVariable int id){
+    public ResponseEntity<Article> findById(@PathVariable int id) {
         Optional<Article> optionalArticle = articleService.findById(id);
 
-        if (!optionalArticle.isPresent()){
+        if (!optionalArticle.isPresent()) {
             ResponseEntity.notFound();
         }
 
@@ -56,10 +56,10 @@ public class ArticleApi {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable int id){
+    public ResponseEntity<Boolean> delete(@PathVariable int id) {
         Optional<Article> optionalArticle = articleService.findById(id);
 
-        if (!optionalArticle.isPresent()){
+        if (!optionalArticle.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
         }
 
